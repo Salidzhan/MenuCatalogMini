@@ -1,0 +1,29 @@
+@model MenuCatalogMini.Models.MenuItem
+
+@{
+    ViewData["Title"] = "Подробности за ястие";
+}
+
+<section class="formbox">
+    <a class="back" asp-action="Index">← Назад към каталога</a>
+
+    <span class="pill">@Model.Category</span>
+
+    <h1>@Model.Name</h1>
+
+    <div class="detail-price">
+        @Model.Price.ToString("0.00") лв.
+    </div>
+
+    <p>@Model.Description</p>
+
+    <div class="grams">Грамаж: @Model.Grams г</div>
+
+    <hr />
+
+    <a class="button dark" asp-action="Edit" asp-route-id="@Model.Id">
+        Редактирай
+    </a>
+
+    <a class="button outline" asp-action="Index">Към каталога</a>
+</section>

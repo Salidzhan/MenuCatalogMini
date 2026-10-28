@@ -1,0 +1,80 @@
+@model IEnumerable<MenuCatalogMini.Models.MenuItem>
+
+@{
+    ViewData["Title"] = "Каталог на ястия";
+    var cats = ViewBag.Categories as string[] ?? Array.Empty<string>();
+}
+
+<section class="hero">
+    <div>
+        <span class="eyebrow">НАШЕТО МЕНЮ</span>
+        <h1>Каталог на ястия</h1>
+        <p>Открийте любимите си вкусове на едно място.</p>
+    </div>
+
+    <a class="button light" asp-action="Create">＋ Добави ястие</a>
+</section>
+
+<form class="filters" method="get">
+    <div class="field">
+        <label for="search">Търсене по име</label>
+        <input id="search" name="search" value="@ViewBag.Search"
+               placeholder="Напр. Шопска салата" />
+    </div>
+
+    <div class="field">
+        <label for="category">Категория</label>
+        <select id="category" name="category">
+            <option value="">Всички категории</option>
+
+            @foreach (var c in cats)
+            {
+                <option value="@c" selected="@(ViewBag.Category as string == c)">
+                    @c
+                </option>
+            }
+        </select>
+    </div>
+
+    <button class="button dark" type="submit">Търси</button>
+    <a class="button outline" asp-action="Index">Изчисти</a>
+</form>
+
+@if (!Model.Any())
+{
+    <section class="empty">
+        <h2>Няма намерени ястия</h2>
+        <p>Опитайте друга дума или категория.</p>
+    </section>
+}
+else
+{
+    <section class="grid">
+        @foreach (var item in Model)
+        {
+            <article class="card">
+                <div class="cardline">
+                    <span class="pill">@item.Category</span>
+                    <strong class="price">@item.Price.ToString("0.00") лв.</strong>
+                </div>
+
+                <h2>@item.Name</h2>
+
+                <p class="description">
+                    @(string.IsNullOrWhiteSpace(item.Description)
+                        ? "Няма описание."
+                        : item.Description)
+                </p>
+
+                <div class="grams">⚖ @item.Grams г</div>
+
+                <div class="actions">
+                    <a asp-action="Details" asp-route-id="@item.Id">Подробности</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Редактирай</a>
+                    <a class="danger-link" asp-action="Delete"
+                       asp-route-id="@item.Id">Изтрий</a>
+                </div>
+            </article>
+        }
+    </section>
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>@ViewData["Title"] - MenuCatalogMini</title>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" asp-controller="Menu" asp-action="Index">
+            🍽 MenuCatalogMini
+        </a>
+
+        <nav>
+            <a asp-controller="Menu" asp-action="Index">Каталог</a>
+            <a asp-controller="Menu" asp-action="Create">Добави ястие</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        @RenderBody()
+    </main>
+
+    <footer>
+        MenuCatalogMini · Каталог на ястия
+    </footer>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

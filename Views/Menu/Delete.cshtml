@@ -1,0 +1,30 @@
+@model MenuCatalogMini.Models.MenuItem
+
+@{
+    ViewData["Title"] = "Изтриване на ястие";
+}
+
+<section class="formbox">
+    <a class="back" asp-action="Index">← Назад към каталога</a>
+
+    <h1>Изтриване на ястие</h1>
+
+    <p>Сигурни ли сте, че искате да изтриете това ястие?</p>
+
+    <div class="deletebox">
+        <h2>@Model.Name</h2>
+
+        <p>
+            @Model.Category · @Model.Grams г ·
+            @Model.Price.ToString("0.00") лв.
+        </p>
+    </div>
+
+    <form asp-action="Delete" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <button class="button red" type="submit">Да, изтрий</button>
+
+        <a class="button outline" asp-action="Index">Отказ</a>
+    </form>
+</section>

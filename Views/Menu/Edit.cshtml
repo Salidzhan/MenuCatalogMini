@@ -1,0 +1,23 @@
+@model MenuCatalogMini.Models.MenuItem
+
+@{
+    ViewData["Title"] = "Редактиране на ястие";
+}
+
+<section class="formbox">
+    <a class="back" asp-action="Index">← Назад към каталога</a>
+
+    <h1>Редактиране на ястие</h1>
+
+    <form asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+
+        <partial name="_Form" model="Model" />
+
+        <button class="button dark" type="submit">
+            Запази промените
+        </button>
+
+        <a class="button outline" asp-action="Index">Отказ</a>
+    </form>
+</section>
